@@ -1,4 +1,5 @@
 import { createApp } from "vue"
+// @ts-ignore
 import App from "./App.vue"
 import "./assets/main.css"
 
@@ -11,6 +12,7 @@ import {
   faPlay,
   faPause,
   faWarning,
+	faTimes
 } from "@fortawesome/free-solid-svg-icons"
 
 library.add(
@@ -19,7 +21,8 @@ library.add(
   faForwardStep,
   faPlay,
   faPause,
-  faWarning
+  faWarning,
+	faTimes
 )
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app")

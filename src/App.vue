@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import type { track } from "@vue/reactivity"
+import { ref } from "vue"
+import PlayerActions from "./components/PlayerActions.vue"
 
-let trackTitle = "SoulMate"
-let trackArtist = "ZICO (feat. IU)"
+let trackTitle = "It's You"
+let trackArtist = "헨리 Henry"
+let isClosed1 = ref(false)
+let isClosed2 = ref(false)
 </script>
 
 <template>
@@ -10,28 +13,48 @@ let trackArtist = "ZICO (feat. IU)"
     <iframe
       width="1"
       height="1"
-      src="https://www.youtube-nocookie.com/embed/Vl1kO9hObpA?controls=0&autoplay=1"
+      src="https://www.youtube-nocookie.com/embed/MFxq3SA2b4I?controls=0&autoplay=1"
       title="YouTube video player"
       frameborder="0"
       allow="autoplay; encrypted-media;"
       class="opacity-0"
     ></iframe>
     <cwo-notice class="fixed top-0 w-full">
-      <div class="text-red-900 bg-red-400 bg-opacity-30 px-7 py-3.5">
-        <strong>
-          <font-awesome-icon :icon="['fas', 'fa-warning']"></font-awesome-icon>
-          Note</strong
-        >
-        In browsers such as Firefox, you must enable the autoplay permission or
-        click "Allow Video and Audio" in the URL bar for this to work.
+      <div
+        :class="{ hidden: isClosed1 }"
+        class="text-red-900 bg-red-400 bg-opacity-30 px-7 py-3.5 flex justify-between items-center"
+      >
+        <div>
+          <strong>
+            <font-awesome-icon
+              :icon="['fas', 'fa-warning']"
+            ></font-awesome-icon>
+            Note</strong
+          >
+          In browsers such as Firefox, you must enable the autoplay permission
+          or click "Allow Video and Audio" in the URL bar for this to work.
+        </div>
+        <button @click="isClosed1 = !isClosed1">
+          <font-awesome-icon :icon="['fas', 'fa-times']"></font-awesome-icon>
+        </button>
       </div>
-      <div class="text-yellow-900 bg-yellow-400 bg-opacity-30 px-7 py-3.5">
-        <strong>
-          <font-awesome-icon :icon="['fas', 'fa-warning']"></font-awesome-icon>
-          Warning</strong
-        >
-        Project still under construction, it's still a working prototype, so
-        none of the buttons work yet!
+      <div
+        :class="{ hidden: isClosed2 }"
+        class="text-yellow-900 bg-yellow-400 bg-opacity-30 px-7 py-3.5 flex justify-between items-center"
+      >
+        <div>
+          <strong>
+            <font-awesome-icon
+              :icon="['fas', 'fa-warning']"
+            ></font-awesome-icon>
+            Warning</strong
+          >
+          Project still under construction, it's still a working prototype, so
+          none of the buttons work yet!
+        </div>
+        <button @click="isClosed2 = !isClosed2">
+          <font-awesome-icon :icon="['fas', 'fa-times']"></font-awesome-icon>
+        </button>
       </div>
     </cwo-notice>
     <cwo-btm-wrapper class="absolute bottom-0 pt-5 pb-10 w-full">
@@ -46,38 +69,11 @@ let trackArtist = "ZICO (feat. IU)"
         <span class="text-sm" :aria-label="`Artist: ${trackArtist}`">{{
           trackArtist
         }}</span>
-        <cwo-player-actions id="btn-actions" class="flex gap-x-3 mt-3">
-          <button
-            class="px-5 py-3 rounded-md shadow-lg bg-purple-200 hover:bg-purple-50"
-          >
-            <font-awesome-icon
-              :icon="['fas', 'fa-backward-step']"
-            ></font-awesome-icon>
-          </button>
-          <button
-            class="px-5 py-3 rounded-md shadow-lg bg-purple-200 hover:bg-purple-50"
-          >
-            <font-awesome-icon :icon="['fas', 'fa-play']"></font-awesome-icon>
-          </button>
-          <button
-            class="px-5 py-3 rounded-md shadow-lg bg-purple-200 hover:bg-purple-50"
-          >
-            <font-awesome-icon
-              :icon="['fas', 'fa-forward-step']"
-            ></font-awesome-icon>
-          </button>
-          <button
-            class="px-5 py-3 rounded-md shadow-lg bg-purple-200 hover:bg-purple-50"
-          >
-            <font-awesome-icon
-              :icon="['fas', 'fa-shuffle']"
-            ></font-awesome-icon>
-          </button>
-        </cwo-player-actions>
+        <PlayerActions />
       </cwo-player>
     </cwo-btm-wrapper>
     <cwo-cutie
-      class="-z-10 w-full h-full fixed inset-0 flex justify-center items-center"
+      class="fade-onload opacity-0 -z-10 w-full h-full fixed inset-0 flex justify-center items-center"
     >
       <img
         class="w-[25%]"
@@ -87,3 +83,17 @@ let trackArtist = "ZICO (feat. IU)"
     </cwo-cutie>
   </main>
 </template>
+
+<style>
+.fade-onload {
+  animation: fadeTheCutie 1200ms linear forwards;
+}
+@keyframes fadeTheCutie {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+</style>
