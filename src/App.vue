@@ -2,8 +2,8 @@
 import { ref } from "vue"
 import PlayerActions from "./components/PlayerActions.vue"
 
-let trackTitle = "It's You"
-let trackArtist = "헨리 Henry"
+let trackTitle = "LET ME OUT"
+let trackArtist = "HYNN"
 let isClosed1 = ref(false)
 let isClosed2 = ref(false)
 </script>
@@ -13,7 +13,7 @@ let isClosed2 = ref(false)
     <iframe
       width="1"
       height="1"
-      src="https://www.youtube-nocookie.com/embed/MFxq3SA2b4I?controls=0&autoplay=1"
+      src="https://www.youtube-nocookie.com/embed/0_su0V729Ro?controls=0&autoplay=1&loop=1"
       title="YouTube video player"
       frameborder="0"
       allow="autoplay; encrypted-media;"
